@@ -6,7 +6,7 @@ using UnityEngine;
 public class GroundMovementController : MonoBehaviour {
 
 	public Transform cam;
-	float speed = 5;
+	float speed = 10;
     CharacterController mover;
 	float accel = 11; 
 	float turnSpeed ;
@@ -33,6 +33,7 @@ public class GroundMovementController : MonoBehaviour {
 		CalculateGround();
 		DoMove();
 		DoGravity();
+		DoJump();
 		mover.Move(velocity*Time.deltaTime);
 		
 	}
@@ -89,6 +90,14 @@ public class GroundMovementController : MonoBehaviour {
 			grounded = true;
 		}else{
 			grounded =false;
+		}
+	}
+
+	private void DoJump(){
+		if(grounded){
+			if(Input.GetButtonDown("Jump")){
+				velocity.y = 6;
+			}
 		}
 	}
 }
