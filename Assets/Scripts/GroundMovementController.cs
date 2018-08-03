@@ -1,36 +1,66 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundMovementController : MonoBehaviour {
-    private Vector2 input;
 
 	public Transform camPivot;
 	public Transform cam;
 	float heading = 0;
-    // Use this for initialization
+	float speed = 5;
+    CharacterController mover;
+	float accel = 2;
+	float turnSpeed = 5;
+	Vector2 input;
+	Vector3 camF;
+	Vector3 camR;
+	Vector3 intent;
+	Vector3 velocity;
+
     void Start () {
-		
+		mover = GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		heading += Input.GetAxis("Mouse X")*Time.deltaTime*180;
-		camPivot.rotation = Quaternion.Euler(0,heading,0);
+		DoInput();
+		CalculateCamera();
+		DoMove();
+		
+	}
 
-		input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-		input = Vector2.ClampMagnitude(input,1);
+    private void DoMove()
+    {
+		intent = camF*input.y + camR*input.x;
 
-		Vector3 camF=cam.forward;
+		if(input.magnitude > 0){
+			Quaternion rot = Quaternion.LookRotation(intent);
+			transform.rotation = Quaternion.Lerp(transform.rotation, rot, turnSpeed*Time.deltaTime);
+		}
 
-		Vector3 camR=cam.right;
+		velocity = Vector3.Lerp(velocity,transform.forward*input.magnitude*speed, accel*Time.deltaTime);
+		mover.Move(velocity*Time.deltaTime);
+    }
+
+    private void CalculateCamera()
+    {
+        camF=cam.forward;
+
+		camR=cam.right;
 
 		camF.y = 0;
 		camR.y = 0;
 		camF = camF.normalized;
 		camR = camR.normalized;
-		//transform.position += new Vector3(input.x,0,input.y)*Time.deltaTime*5;
+    }
 
-		transform.transform.position += (camF*input.y + camR*input.x)*Time.deltaTime*5;
-	}
+    private void DoInput()
+    {
+        heading += Input.GetAxis("Mouse X")*Time.deltaTime*180;
+		camPivot.rotation = Quaternion.Euler(0,heading,0);
+
+		input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+		input = Vector2.ClampMagnitude(input,1);
+    }
 }
