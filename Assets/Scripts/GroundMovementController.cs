@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class GroundMovementController : MonoBehaviour {
 
-	public Transform camPivot;
 	public Transform cam;
-	float heading = 0;
 	float speed = 5;
     CharacterController mover;
 	float accel = 2;
@@ -57,9 +55,6 @@ public class GroundMovementController : MonoBehaviour {
 
     private void DoInput()
     {
-        heading += Input.GetAxis("Mouse X")*Time.deltaTime*180;
-		camPivot.rotation = Quaternion.Euler(0,heading,0);
-
 		input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 		input = Vector2.ClampMagnitude(input,1);
     }
