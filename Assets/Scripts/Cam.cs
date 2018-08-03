@@ -16,7 +16,7 @@ public class Cam : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		heading += Input.GetAxis("Mouse X")*Time.deltaTime*180;
 		transform.rotation = Quaternion.Euler(tilt, heading, 0);
 

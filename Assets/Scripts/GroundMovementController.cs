@@ -8,13 +8,19 @@ public class GroundMovementController : MonoBehaviour {
 	public Transform cam;
 	float speed = 5;
     CharacterController mover;
-	float accel = 2;
-	float turnSpeed = 5;
+	float accel = 11; 
+	float turnSpeed ;
+	float turnSpeedLow = 7;
+	float turnSpeedHigh = 20;
+	float gravity = 10;
 	Vector2 input;
 	Vector3 camF;
 	Vector3 camR;
 	Vector3 intent;
 	Vector3 velocity;
+	Vector3 velocityXZ;
+	bool grounded = false;
+
 
     void Start () {
 		mover = GetComponent<CharacterController>();
@@ -24,7 +30,10 @@ public class GroundMovementController : MonoBehaviour {
 	void Update () {
 		DoInput();
 		CalculateCamera();
+		CalculateGround();
 		DoMove();
+		DoGravity();
+		mover.Move(velocity*Time.deltaTime);
 		
 	}
 
@@ -32,13 +41,19 @@ public class GroundMovementController : MonoBehaviour {
     {
 		intent = camF*input.y + camR*input.x;
 
+		float ts = velocity.magnitude/5;
+		turnSpeed = Mathf.Lerp(turnSpeedHigh, turnSpeedLow, ts);
 		if(input.magnitude > 0){
 			Quaternion rot = Quaternion.LookRotation(intent);
 			transform.rotation = Quaternion.Lerp(transform.rotation, rot, turnSpeed*Time.deltaTime);
 		}
 
-		velocity = Vector3.Lerp(velocity,transform.forward*input.magnitude*speed, accel*Time.deltaTime);
-		mover.Move(velocity*Time.deltaTime);
+		velocityXZ = velocity;
+		velocityXZ.y = 0;
+
+		velocityXZ = Vector3.Lerp(velocityXZ,transform.forward*input.magnitude*speed, accel*Time.deltaTime);
+		velocity = new Vector3(velocityXZ.x, velocity.y, velocityXZ.z);
+		
     }
 
     private void CalculateCamera()
@@ -58,4 +73,22 @@ public class GroundMovementController : MonoBehaviour {
 		input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 		input = Vector2.ClampMagnitude(input,1);
     }
+
+	private void DoGravity(){
+		if(grounded){
+			velocity.y = -0.5f;
+		}else{
+			velocity.y -= gravity * Time.deltaTime;
+			velocity.y = Mathf.Clamp(velocity.y, -10, 10);
+		}
+	}
+
+	private void CalculateGround(){
+		RaycastHit hit;
+		if(Physics.Raycast(transform.position+Vector3.up*0.1f, -Vector3.up, out hit, 0.2f)){
+			grounded = true;
+		}else{
+			grounded =false;
+		}
+	}
 }
