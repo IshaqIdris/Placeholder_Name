@@ -8,11 +8,12 @@ public class Animation : MonoBehaviour {
 
 	float inputH;
 	float inputV;
-	
+	bool jump;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
+		jump =false;
 	}
 	
 	// Update is called once per frame
@@ -22,5 +23,13 @@ public class Animation : MonoBehaviour {
 
 		animator.SetFloat("inputH", inputH);
 		animator.SetFloat("inputV", inputV);
+
+		if(Input.GetButtonDown("Jump")){
+			jump = true;
+		}else{
+			jump = false;
+		}
+
+		animator.SetBool("jump", jump);
 	}
 }

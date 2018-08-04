@@ -20,6 +20,7 @@ public class GroundMovementController : MonoBehaviour {
 	Vector3 velocity;
 	Vector3 velocityXZ;
 	bool grounded = false;
+	public float jumpHeight;
 
 
     void Start () {
@@ -96,7 +97,7 @@ public class GroundMovementController : MonoBehaviour {
 	private void DoJump(){
 		if(grounded){
 			if(Input.GetButtonDown("Jump")){
-				velocity.y = 6;
+				velocity.y = jumpHeight;
 			}
 		}
 	}
