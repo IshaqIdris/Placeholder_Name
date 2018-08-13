@@ -10,21 +10,25 @@ public class GroundMovementController : MonoBehaviour {
     CharacterController mover;
 	float accel = 11; 
 	float turnSpeed ;
-	float turnSpeedLow = 7;
-	float turnSpeedHigh = 20;
-	float gravity = 10;
+	public float turnSpeedLow;
+	public float turnSpeedHigh;
+	public float gravity ;
 	Vector2 input;
 	Vector3 camF;
 	Vector3 camR;
 	Vector3 intent;
 	Vector3 velocity;
 	Vector3 velocityXZ;
-	bool grounded = false;
+	bool grounded = true;
 	public float jumpHeight;
+    public float jumpHeightHold;
+    float timer;
+    bool jumpDown = false;
 
 
     void Start () {
 		mover = GetComponent<CharacterController>();
+        timer = 0;
 	}
 	
 	// Update is called once per frame
@@ -34,8 +38,24 @@ public class GroundMovementController : MonoBehaviour {
 		CalculateGround();
 		DoMove();
 		DoGravity();
-		DoJump();
+
+        if (jumpDown)
+        {
+            this.timer += Time.deltaTime;
+        }
+
+        DoJump(this.timer);
+
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            jumpDown = false;
+            print(this.timer);
+            this.timer = 0;
+        }
+
 		mover.Move(velocity*Time.deltaTime);
+
 		
 	}
 
@@ -87,18 +107,33 @@ public class GroundMovementController : MonoBehaviour {
 
 	private void CalculateGround(){
 		RaycastHit hit;
-		if(Physics.Raycast(transform.position+Vector3.up*0.1f, -Vector3.up, out hit, 0.2f)){
+		if(Physics.Raycast(transform.position+Vector3.up*0.15f, -Vector3.up, out hit, 0.2f)){
 			grounded = true;
 		}else{
 			grounded =false;
 		}
 	}
 
-	private void DoJump(){
+    private void DoJump(float timer){
 		if(grounded){
-			if(Input.GetButtonDown("Jump")){
-				velocity.y = jumpHeight;
-			}
+            if (Input.GetButtonDown("Jump"))
+            {
+                jumpDown = true;
+            }
+            if (jumpDown)
+            {
+                if (timer < 0.1)
+                {
+                    print("tap");
+                    velocity.y = jumpHeight;
+                }
+                else if (timer > 0.1)
+                {
+                    print("hold");
+                    velocity.y = jumpHeightHold;
+                }
+            }
+
 		}
 	}
 }
