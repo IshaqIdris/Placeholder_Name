@@ -116,7 +116,6 @@ public class GroundMovementController : MonoBehaviour {
 
     private void DoJump(float timer){
 		if(grounded){
-<<<<<<< HEAD
             if (Input.GetButtonDown("Jump"))
             {
                 jumpDown = true;
@@ -129,20 +128,7 @@ public class GroundMovementController : MonoBehaviour {
                     velocity.y = jumpHeight;
                 }
                 else if (timer > 0.1)
-=======
-            if (Input.GetButtonDown("Jump"))
-            {
-                jumpDown = true;
-            }
-            if (jumpDown)
-            {
-                if (timer < 0.1)
-                {
-                    print("tap");
-                    velocity.y = jumpHeight;
-                }
-                else if (timer > 0.1)
->>>>>>> a9ca72958d1b5990ad347410d37e5b4a3dd5d7ef
+
                 {
                     print("hold");
                     velocity.y = jumpHeightHold;
