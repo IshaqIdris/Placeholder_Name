@@ -322,9 +322,15 @@ MonoBehaviour:
   cam: {fileID: 282840814}
   turnSpeedLow: 7
   turnSpeedHigh: 20
+<<<<<<< HEAD
   gravity: 10
   jumpHeight: 10
   jumpHeightHold: 0
+=======
+  gravity: 20
+  jumpHeight: 8
+  jumpHeightHold: 30
+>>>>>>> a9ca72958d1b5990ad347410d37e5b4a3dd5d7ef
 --- !u!143 &429279879
 CharacterController:
   m_ObjectHideFlags: 0
