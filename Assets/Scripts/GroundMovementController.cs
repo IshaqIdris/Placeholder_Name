@@ -128,7 +128,6 @@ public class GroundMovementController : MonoBehaviour {
                     velocity.y = jumpHeight;
                 }
                 else if (timer > 0.1)
-
                 {
                     print("hold");
                     velocity.y = jumpHeightHold;

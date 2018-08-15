@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour {
+public class Gun : MonoBehaviour
+{
 
     GameObject bullet;
     float timer;
@@ -12,13 +13,14 @@ public class Gun : MonoBehaviour {
     float bigBulletTime;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         spiral = new Vector3(0f, 0f, -1f);
         timer = 0;
         bigBulletTime = 0;
         bullet = Resources.Load("laser") as GameObject;
-	}
+    }
 
     // Update is called once per frame
     void Update()
@@ -45,7 +47,7 @@ public class Gun : MonoBehaviour {
 
 
 
-	}
+    }
 
     private void shoot(Vector3 forward)
     {
@@ -54,14 +56,16 @@ public class Gun : MonoBehaviour {
         Rigidbody rb = projectileForward.GetComponent<Rigidbody>();
 
 
-       
+
 
         if (bigBulletTime > 1)
         {
             projectileForward.transform.localScale += new Vector3(1F, 1F, 1F);
             bigBulletTime = 0;
             rb.velocity = forward * shootSpeed * 10;
-        }else{
+        }
+        else
+        {
             rb.velocity = forward * shootSpeed;
         }
         Destroy(projectileForward, 10);
