@@ -24,11 +24,15 @@ public class GroundMovementController : MonoBehaviour {
     public float jumpHeightHold;
     float timer;
     bool jumpDown = false;
+    float jumpCounter;
+    bool cantDoubleJump;
 
 
     void Start () {
 		mover = GetComponent<CharacterController>();
         timer = 0;
+        jumpCounter = 0;
+        cantDoubleJump = true;
 	}
 	
 	// Update is called once per frame
@@ -39,20 +43,21 @@ public class GroundMovementController : MonoBehaviour {
 		DoMove();
 		DoGravity();
 
-        if (jumpDown)
-        {
-            this.timer += Time.deltaTime;
-        }
+        print(jumpCounter);
+        //if (jumpDown)
+        //{
+            //this.timer += Time.deltaTime;
+        //}
 
-        DoJump(this.timer);
+       DoJump();
 
 
         if (Input.GetButtonUp("Jump"))
         {
             jumpDown = false;
-            print(this.timer);
-            this.timer = 0;
-        }
+            //print(this.timer);
+            //this.timer = 0;
+       }
 
 		mover.Move(velocity*Time.deltaTime);
 
@@ -114,26 +119,34 @@ public class GroundMovementController : MonoBehaviour {
 		}
 	}
 
-    private void DoJump(float timer){
-		if(grounded){
-            if (Input.GetButtonDown("Jump"))
-            {
-                jumpDown = true;
-            }
-            if (jumpDown)
-            {
-                if (timer < 0.1)
+    private void DoJump(){
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpDown = true;
+            print(jumpCounter);
+        
+            if(grounded){
+                if ( jumpDown)
                 {
+                    //if (timer < 0.1)
+                    //{
                     print("tap");
                     velocity.y = jumpHeight;
+                    jumpCounter = 0;
+                    cantDoubleJump = false;
+                    //}
+                    //else if (timer > 0.1)
+                    //{
+                       // print("hold");
+                       // velocity.y = jumpHeightHold;
+                    //}
                 }
-                else if (timer > 0.1)
-                {
-                    print("hold");
-                    velocity.y = jumpHeightHold;
-                }
-            }
 
-		}
+            }else if( !grounded && jumpCounter < 2){
+                print("Double Jump");
+                velocity.y = jumpHeight;
+                jumpCounter += 1;
+            }
+        }
 	}
 }
