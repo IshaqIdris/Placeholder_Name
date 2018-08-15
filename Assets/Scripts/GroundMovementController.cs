@@ -142,7 +142,7 @@ public class GroundMovementController : MonoBehaviour {
                     //}
                 }
 
-            }else if( !grounded && jumpCounter < 2){
+            }else if( !grounded && jumpCounter < 1){
                 print("Double Jump");
                 velocity.y = jumpHeight;
                 jumpCounter += 1;
