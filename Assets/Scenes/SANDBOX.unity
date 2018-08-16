@@ -673,9 +673,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 282840814}
-  turnSpeedLow: 7
-  turnSpeedHigh: 20
-  gravity: 20
+  turnSpeedLow: 60
+  turnSpeedHigh: 60
+  gravity: 25
   jumpHeight: 8
   jumpHeightHold: 30
 --- !u!143 &429279879
