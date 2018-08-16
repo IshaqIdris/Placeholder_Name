@@ -149,4 +149,12 @@ public class GroundMovementController : MonoBehaviour {
             }
         }
 	}
+
+    void OnControllerColliderHit(ControllerColliderHit collision)
+    {
+
+        print("Collided!");
+        velocity.y = 5000;
+
+    }
 }

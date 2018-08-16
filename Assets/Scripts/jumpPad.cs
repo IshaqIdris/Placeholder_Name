@@ -6,8 +6,9 @@ public class jumpPad : MonoBehaviour {
 
 	
 
-    private void OnCollisionEnter(Collision collision)
+    void OnControllerColliderHit(ControllerColliderHit collision)
     {
+        
         print("Collided!");
         if (collision.gameObject.tag == "Player")
         {
