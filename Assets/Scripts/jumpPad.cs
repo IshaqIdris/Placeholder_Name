@@ -13,7 +13,7 @@ public class jumpPad : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             print("Collided!");
-            collision.gameObject.GetComponent<CharacterController>().Move(new Vector3(0, 500, 0));
+            collision.gameObject.GetComponent<CharacterController>().Move(new Vector3(0, 5000, 0));
         }
 
     }
