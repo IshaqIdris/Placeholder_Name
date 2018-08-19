@@ -12,6 +12,7 @@ public class GroundMovementController : MonoBehaviour {
 	public Transform cam;
     public float jumpHeight;
     public float fallSpeed;
+    public GameObject particles;
 	
     CharacterController mover;
 
@@ -43,6 +44,7 @@ public class GroundMovementController : MonoBehaviour {
         jumpCounter = 0;
         cantDoubleJump = true;
         jumpPad = false;
+        particles.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -57,6 +59,13 @@ public class GroundMovementController : MonoBehaviour {
         if (Input.GetButtonUp("Jump"))
         {
             jumpDown = false;
+        }
+
+        print(velocity.magnitude);
+        if(velocity.magnitude > 7){
+            particles.SetActive(true);
+        }else{
+            particles.SetActive(false);
         }
 
 		mover.Move(velocity*Time.deltaTime);
