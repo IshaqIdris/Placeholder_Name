@@ -26,6 +26,7 @@ public class GroundMovementController : MonoBehaviour {
     bool jumpDown = false;
     float jumpCounter;
     bool cantDoubleJump;
+    public float fallSpeed;
 
 
     void Start () {
@@ -124,9 +125,10 @@ public class GroundMovementController : MonoBehaviour {
         {
             jumpDown = true;
             print(jumpCounter);
-        
-            if(grounded){
-                if ( jumpDown)
+
+            if (grounded)
+            {
+                if (jumpDown)
                 {
                     //if (timer < 0.1)
                     //{
@@ -137,16 +139,22 @@ public class GroundMovementController : MonoBehaviour {
                     //}
                     //else if (timer > 0.1)
                     //{
-                       // print("hold");
-                       // velocity.y = jumpHeightHold;
+                    // print("hold");
+                    // velocity.y = jumpHeightHold;
                     //}
                 }
 
-            }else if( !grounded && jumpCounter < 1){
+            }
+            else if (!grounded && jumpCounter < 1)
+            {
                 print("Double Jump");
                 velocity.y = jumpHeight;
                 jumpCounter += 1;
             }
+        }
+        else if (mover.velocity.y < 0)
+        {
+            velocity.y = fallSpeed;
         }
 	}
 

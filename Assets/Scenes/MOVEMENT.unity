@@ -329,6 +329,7 @@ MonoBehaviour:
   gravity: 50
   jumpHeight: 8
   jumpHeightHold: 30
+  fallSpeed: -10
 --- !u!143 &447225203
 CharacterController:
   m_ObjectHideFlags: 0

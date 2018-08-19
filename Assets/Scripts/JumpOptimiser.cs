@@ -6,7 +6,7 @@ using UnityEngine;
 public class JumpOptimiser : MonoBehaviour
 {
 
-    CharacterController mover;
+    private CharacterController mover;
     public float fallMultiplier = 10;
 
     void Start()
@@ -17,8 +17,8 @@ public class JumpOptimiser : MonoBehaviour
     private void Update()
     {
         if(mover.velocity.y < 0){
-            mover.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-
+            //mover.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            print("Falling");
         }
     }
 
