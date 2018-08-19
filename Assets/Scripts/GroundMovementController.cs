@@ -20,6 +20,7 @@ public class GroundMovementController : MonoBehaviour {
 	Vector3 velocity;
 	Vector3 velocityXZ;
 	bool grounded = true;
+    bool jumpPad;
 	public float jumpHeight;
     public float jumpHeightHold;
     float timer;
@@ -34,6 +35,7 @@ public class GroundMovementController : MonoBehaviour {
         timer = 0;
         jumpCounter = 0;
         cantDoubleJump = true;
+        jumpPad = false;
 	}
 	
 	// Update is called once per frame
@@ -105,10 +107,13 @@ public class GroundMovementController : MonoBehaviour {
 	private void DoGravity(){
 		if(grounded){
 			velocity.y = -0.5f;
-		}else{
+        }else if(!jumpPad){
 			velocity.y -= gravity * Time.deltaTime;
 			velocity.y = Mathf.Clamp(velocity.y, -10, 10);
-		}
+        }else{
+            velocity.y -= gravity * Time.deltaTime;
+            velocity.y = Mathf.Clamp(velocity.y, -30, 30);
+        }
 	}
 
 	private void CalculateGround(){
@@ -130,18 +135,11 @@ public class GroundMovementController : MonoBehaviour {
             {
                 if (jumpDown)
                 {
-                    //if (timer < 0.1)
-                    //{
                     print("tap");
                     velocity.y = jumpHeight;
                     jumpCounter = 0;
                     cantDoubleJump = false;
-                    //}
-                    //else if (timer > 0.1)
-                    //{
-                    // print("hold");
-                    // velocity.y = jumpHeightHold;
-                    //}
+
                 }
 
             }
@@ -152,17 +150,23 @@ public class GroundMovementController : MonoBehaviour {
                 jumpCounter += 1;
             }
         }
-        else if (mover.velocity.y < 0)
+        else if (mover.velocity.y < 0 && !jumpPad)
         {
             velocity.y = fallSpeed;
+        }else if (mover.velocity.y < 0 && jumpPad){
+            velocity.y = -30;
         }
 	}
 
-    //void OnControllerColliderHit(ControllerColliderHit collision)
-    //{
+    void OnControllerColliderHit(ControllerColliderHit collision)
+    {
+        if(collision.gameObject.CompareTag("JumpPad")){
+            print("Collided!");
+            jumpPad = true;
+            velocity.y = 500;
+        }else{
+            jumpPad = false;
+        }
 
-    //    print("Collided!");
-    //    velocity.y = 5000;
-
-    //}
+    }
 }

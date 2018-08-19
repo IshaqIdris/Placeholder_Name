@@ -24,12 +24,13 @@ public class Animation : MonoBehaviour {
 		animator.SetFloat("inputH", inputH);
 		animator.SetFloat("inputV", inputV);
 
-		if(Input.GetButtonDown("Jump")){
+		if(Input.GetButton("Jump")){
 			jump = true;
 		}else{
 			jump = false;
 		}
 
+        print("Jump : " + jump);
 		animator.SetBool("jump", jump);
 	}
 }
