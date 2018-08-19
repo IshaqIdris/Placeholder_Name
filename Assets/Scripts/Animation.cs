@@ -30,7 +30,6 @@ public class Animation : MonoBehaviour {
 			jump = false;
 		}
 
-        print("Jump : " + jump);
 		animator.SetBool("jump", jump);
 	}
 }

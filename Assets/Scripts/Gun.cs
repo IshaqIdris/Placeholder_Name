@@ -8,13 +8,11 @@ public class Gun : MonoBehaviour {
     GameObject bullet;
     float timer;
     public float shootSpeed = 10;
-    Vector3 spiral;
     float bigBulletTime;
 
 
 	// Use this for initialization
 	void Start () {
-        spiral = new Vector3(0f, 0f, -1f);
         timer = 0;
         bigBulletTime = 0;
         bullet = Resources.Load("bullet") as GameObject;
@@ -29,7 +27,7 @@ public class Gun : MonoBehaviour {
 
         if (timer > 0.5)
         {
-            // = this.spiral * Quaternion.Euler(0, 10, 0);
+            //Bullets shot in different directions
             shoot(transform.forward);
             shoot(Quaternion.Euler(0, -45, 0) * new Vector3(0f, 0f, -1f));
             shoot(Quaternion.Euler(0, 45, 0) * new Vector3(0f, 0f, -1f));
@@ -42,9 +40,6 @@ public class Gun : MonoBehaviour {
 
             timer = 0;
         }
-
-
-
 	}
 
     private void shoot(Vector3 forward)
@@ -53,9 +48,7 @@ public class Gun : MonoBehaviour {
         projectileForward.transform.position = transform.position + forward;
         Rigidbody rb = projectileForward.GetComponent<Rigidbody>();
 
-
-       
-
+        //Fire big bullet every <X> seconds
         if (bigBulletTime > 1)
         {
             projectileForward.transform.localScale += new Vector3(1F, 1F, 1F);

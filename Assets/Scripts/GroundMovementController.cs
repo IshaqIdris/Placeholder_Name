@@ -5,14 +5,22 @@ using UnityEngine;
 
 public class GroundMovementController : MonoBehaviour {
 
+    //Public Manipulators
+    public float turnSpeedLow;
+    public float turnSpeedHigh;
+    public float gravity;
 	public Transform cam;
-	float speed = 10;
+    public float jumpHeight;
+    public float fallSpeed;
+	
     CharacterController mover;
+
+    float speed = 10;
 	float accel = 11; 
 	float turnSpeed ;
-	public float turnSpeedLow;
-	public float turnSpeedHigh;
-	public float gravity ;
+    float timer;
+    float jumpCounter;
+	
 	Vector2 input;
 	Vector3 camF;
 	Vector3 camR;
@@ -21,13 +29,12 @@ public class GroundMovementController : MonoBehaviour {
 	Vector3 velocityXZ;
 	bool grounded = true;
     bool jumpPad;
-	public float jumpHeight;
-    public float jumpHeightHold;
-    float timer;
+	
+
     bool jumpDown = false;
-    float jumpCounter;
+
     bool cantDoubleJump;
-    public float fallSpeed;
+
 
 
     void Start () {
@@ -148,6 +155,7 @@ public class GroundMovementController : MonoBehaviour {
 
     void OnControllerColliderHit(ControllerColliderHit collision)
     {
+        //Collision with Jump Pad
         if(collision.gameObject.CompareTag("JumpPad")){
             jumpPad = true;
             velocity.y = 500;
@@ -155,10 +163,18 @@ public class GroundMovementController : MonoBehaviour {
             jumpPad = false;
         }
 
+        //Collision with Moving Pad
         if (collision.gameObject.CompareTag("pad"))
         {
             print("On Rock");
             transform.parent = collision.transform;
+        }else{
+            print("DEPARENTED");
+            transform.parent = null;
+        }
+
+        if (collision.gameObject.CompareTag("collectable")){
+            collision.gameObject.SetActive(false);
         }
     }
 

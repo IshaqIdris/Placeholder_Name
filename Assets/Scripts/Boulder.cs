@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Boulder : MonoBehaviour {
 
+    public float shootSpeed = 10;
+
     GameObject bullet;
     float timer;
-    public float shootSpeed = 10;
-    float bigBulletTime;
 
 
     // Use this for initialization
     void Start()
     {
         timer = 0;
-        bigBulletTime = 0;
         bullet = Resources.Load("Boulder") as GameObject;
     }
 
@@ -23,17 +22,12 @@ public class Boulder : MonoBehaviour {
     {
         timer += Time.deltaTime;
 
-        bigBulletTime += Time.deltaTime;
-
         //Time code each bullet is shot
         if (timer > 3)
         {
             shoot(transform.forward);
             timer = 0;
         }
-
-
-
     }
 
     //Instaniates Bullet and shoots in the forward direction
