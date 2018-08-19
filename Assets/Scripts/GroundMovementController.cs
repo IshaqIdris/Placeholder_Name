@@ -45,22 +45,12 @@ public class GroundMovementController : MonoBehaviour {
 		CalculateGround();
 		DoMove();
 		DoGravity();
-
-        print(jumpCounter);
-        //if (jumpDown)
-        //{
-            //this.timer += Time.deltaTime;
-        //}
-
-       DoJump();
-
+        DoJump();
 
         if (Input.GetButtonUp("Jump"))
         {
             jumpDown = false;
-            //print(this.timer);
-            //this.timer = 0;
-       }
+        }
 
 		mover.Move(velocity*Time.deltaTime);
 
@@ -135,7 +125,6 @@ public class GroundMovementController : MonoBehaviour {
             {
                 if (jumpDown)
                 {
-                    print("tap");
                     velocity.y = jumpHeight;
                     jumpCounter = 0;
                     cantDoubleJump = false;
@@ -145,7 +134,6 @@ public class GroundMovementController : MonoBehaviour {
             }
             else if (!grounded && jumpCounter < 1)
             {
-                print("Double Jump");
                 velocity.y = jumpHeight;
                 jumpCounter += 1;
             }
@@ -161,12 +149,18 @@ public class GroundMovementController : MonoBehaviour {
     void OnControllerColliderHit(ControllerColliderHit collision)
     {
         if(collision.gameObject.CompareTag("JumpPad")){
-            print("Collided!");
             jumpPad = true;
             velocity.y = 500;
         }else{
             jumpPad = false;
         }
 
+        if (collision.gameObject.CompareTag("pad"))
+        {
+            print("On Rock");
+            transform.parent = collision.transform;
+        }
     }
+
+
 }

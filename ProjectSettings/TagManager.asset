@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - JumpPad
+  - Moving Pads
+  - pad
   layers:
   - Default
   - TransparentFX

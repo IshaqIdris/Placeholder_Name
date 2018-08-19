@@ -25,19 +25,10 @@ public class Boulder : MonoBehaviour {
 
         bigBulletTime += Time.deltaTime;
 
+        //Time code each bullet is shot
         if (timer > 3)
         {
-            // = this.spiral * Quaternion.Euler(0, 10, 0);
             shoot(transform.forward);
-            //shoot(Quaternion.Euler(0, -45, 0) * new Vector3(0f, 0f, -1f));
-            //shoot(Quaternion.Euler(0, 45, 0) * new Vector3(0f, 0f, -1f));
-            //shoot(Quaternion.Euler(0, 135, 0) * new Vector3(0f, 0f, -1f));
-            //shoot(Quaternion.Euler(0, -135, 0) * new Vector3(0f, 0f, -1f));
-            //shoot(Quaternion.Euler(0, -75, 0) * new Vector3(0f, 0f, -1f));
-            //shoot(Quaternion.Euler(0, 75, 0) * new Vector3(0f, 0f, -1f));
-            //shoot(new Vector3(1f, 0f, 0f));
-            //shoot(new Vector3(-1f, 0f, -0f));
-
             timer = 0;
         }
 
@@ -45,15 +36,13 @@ public class Boulder : MonoBehaviour {
 
     }
 
+    //Instaniates Bullet and shoots in the forward direction
     private void shoot(Vector3 forward)
     {
         GameObject projectileForward = Instantiate(bullet) as GameObject;
         projectileForward.transform.position = transform.position + forward;
         Rigidbody rb = projectileForward.GetComponent<Rigidbody>();
-
-
         projectileForward.transform.localScale += new Vector3(1F, 1F, 1F);
-       
         rb.velocity = forward * shootSpeed;
 
         Destroy(projectileForward, 2);

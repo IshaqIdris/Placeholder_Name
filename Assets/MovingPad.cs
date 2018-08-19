@@ -6,11 +6,12 @@ public class MovingPad : MonoBehaviour
 {
 
 
-    void OnControllerColliderHit(ControllerColliderHit collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            transform.parent = collision.transform;
-        }
-    }
+    //void OnControllerColliderEnter(ControllerColliderHit collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        print("On Rock");
+    //        transform.parent = collision.transform;
+    //    }
+    //}
 }
