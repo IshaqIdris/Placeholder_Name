@@ -14,7 +14,7 @@ public class Boulder : MonoBehaviour {
     void Start()
     {
         timer = 0;
-        bullet = Resources.Load("Boulder") as GameObject;
+        bullet = Resources.Load("Boulder2") as GameObject;
     }
 
     // Update is called once per frame
