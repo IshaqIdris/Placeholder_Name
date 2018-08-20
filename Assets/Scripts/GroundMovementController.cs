@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundMovementController : MonoBehaviour {
-
+    
     //Public Manipulators
     public float turnSpeedLow;
     public float turnSpeedHigh;
@@ -28,8 +28,10 @@ public class GroundMovementController : MonoBehaviour {
 	Vector3 intent;
 	Vector3 velocity;
 	Vector3 velocityXZ;
+
 	bool grounded = true;
     bool jumpPad;
+    bool jumpPadDown;
 	
 
     bool jumpDown = false;
@@ -45,6 +47,7 @@ public class GroundMovementController : MonoBehaviour {
         cantDoubleJump = true;
         jumpPad = false;
         particles.SetActive(false);
+        jumpPadDown = false;
 	}
 	
 	// Update is called once per frame
@@ -113,10 +116,11 @@ public class GroundMovementController : MonoBehaviour {
 	private void DoGravity(){
 		if(grounded){
 			velocity.y = -0.5f;
-        }else if(!jumpPad){
+        }else if(jumpPad){
 			velocity.y -= gravity * Time.deltaTime;
 			velocity.y = Mathf.Clamp(velocity.y, -10, 10);
         }else{
+            print("JUMPPAD");
             velocity.y -= gravity * Time.deltaTime;
             velocity.y = Mathf.Clamp(velocity.y, -30, 30);
         }
@@ -126,6 +130,7 @@ public class GroundMovementController : MonoBehaviour {
 		RaycastHit hit;
 		if(Physics.Raycast(transform.position+Vector3.up*0.15f, -Vector3.up, out hit, 0.2f)){
 			grounded = true;
+            jumpPadDown = false;
 		}else{
 			grounded =false;
 		}
@@ -144,9 +149,7 @@ public class GroundMovementController : MonoBehaviour {
                     velocity.y = jumpHeight;
                     jumpCounter = 0;
                     cantDoubleJump = false;
-
                 }
-
             }
             else if (!grounded && jumpCounter < 1)
             {
@@ -154,23 +157,29 @@ public class GroundMovementController : MonoBehaviour {
                 jumpCounter += 1;
             }
         }
-        else if (mover.velocity.y < 0 && !jumpPad)
+        else if (jumpPad)
+        {
+            velocity.y = 500;
+            jumpPadDown = true;
+            jumpPad = false;
+        }
+
+        else if ((mover.velocity.y < 0 && !jumpPad) ){
+            velocity.y = -30;
+        }else if (mover.velocity.y < 0 && jumpPad)
         {
             velocity.y = fallSpeed;
-        }else if (mover.velocity.y < 0 && jumpPad){
-            velocity.y = -30;
         }
 	}
 
     void OnControllerColliderHit(ControllerColliderHit collision)
     {
         //Collision with Jump Pad
-        if(collision.gameObject.CompareTag("JumpPad")){
-            jumpPad = true;
-            velocity.y = 500;
-        }else{
-            jumpPad = false;
-        }
+        //if(collision.gameObject.CompareTag("JumpPad")){
+        //    jumpPad = true;
+        //}else{
+        //    jumpPad = false;
+        //}
 
         //Collision with Moving Pad
         if (collision.gameObject.CompareTag("pad"))
@@ -187,5 +196,18 @@ public class GroundMovementController : MonoBehaviour {
         }
     }
 
+    public void SetJumPad(bool jumpPadBool)
+    {
+        print("GOT HERE");
+        jumpPad = jumpPadBool;
+    }
 
+    public CharacterController GetMover(){
+        return mover;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("COLLIDED");
+    }
 }
