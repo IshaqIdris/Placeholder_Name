@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33658789280718882}
   - component: {fileID: 23906153863535960}
   - component: {fileID: 65739124513114442}
-  - component: {fileID: 114457988132769770}
+  - component: {fileID: 114480106035593864}
   m_Layer: 0
-  m_Name: JumpadLow
+  m_Name: JumpadMedium
   m_TagString: JumpPad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: cbf2b57bedbdf4e788145d0716965f3d, type: 2}
+  - {fileID: 2100000, guid: 7f524e514341b4d54b30ff990b31ea09, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0361046, y: 11.965192, z: 1.2274004}
   m_Center: {x: -0.00042038682, y: 5.4825006, z: -0.046803273}
---- !u!114 &114457988132769770
+--- !u!114 &114480106035593864
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,6 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1166602180639514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22e573735d7b249728b2dbc52f7b3f6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 21afbae095b104ea9880a24eea58a1ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

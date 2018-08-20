@@ -8,6 +8,7 @@ TagManager:
   - Moving Pads
   - pad
   - collectable
+  - boulder
   layers:
   - Default
   - TransparentFX

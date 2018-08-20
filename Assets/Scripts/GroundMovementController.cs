@@ -136,7 +136,7 @@ public class GroundMovementController : MonoBehaviour
         }
         else if (jumpPadType == "medium"){
             velocity.y -= gravity * Time.deltaTime;
-            velocity.y = Mathf.Clamp(velocity.y, -40, 40);
+            velocity.y = Mathf.Clamp(velocity.y, -35, 35);
         }
         else if (jumpPadType =="high")
         {
@@ -194,7 +194,7 @@ public class GroundMovementController : MonoBehaviour
             jumpPad = false;
         }else if (jumpPad && jumpPadType == "medium")
         {
-            velocity.y = 100;
+            velocity.y = 25;
             jumpPadDown = true;
             jumpPad = false;
         }else if (jumpPad && jumpPadType == "high")
@@ -227,12 +227,6 @@ public class GroundMovementController : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit collision)
     {
-        //Collision with Jump Pad
-        //if(collision.gameObject.CompareTag("JumpPad")){
-        //    jumpPad = true;
-        //}else{
-        //    jumpPad = false;
-        //}
 
         //Collision with Moving Pad
         if (collision.gameObject.CompareTag("pad"))
@@ -250,6 +244,7 @@ public class GroundMovementController : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
         }
+
     }
 
     public void SetJumPad(bool jumpPadBool, String type)
