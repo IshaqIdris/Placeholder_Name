@@ -201,12 +201,12 @@ public class GroundMovementController : MonoBehaviour
         }
         else if (jumpPad && jumpPadType == "low" )
         {
-            velocity.y = 30;
+            velocity.y = 50;
             jumpPadDown = true;
             jumpPad = false;
         }else if (jumpPad && jumpPadType == "medium")
         {
-            velocity.y = 40;
+            velocity.y = 70;
             jumpPadDown = true;
             jumpPad = false;
         }else if (jumpPad && jumpPadType == "high")

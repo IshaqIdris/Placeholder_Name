@@ -48,7 +48,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1552299765911300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c87cfda6d9cf4d45959d8f3b45834e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 84448dc48a96941928165c22543824af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootSpeed: 10
