@@ -4,12 +4,13 @@ using System.Collections;
 public class EnemyBoulder: MonoBehaviour
 {
     // Use this for initialization
-    private void OnTriggerEnter(Collider other)
+    private void O(Collider other)
     {
+        print("BOULDER Hit");
         if (other.gameObject.CompareTag("Player"))
         {
             print("BOULDER");
-            other.gameObject.GetComponent<Animation>().setDead(true);
+            GetComponent<Animation>().setDead(true);
         }
     }
 }

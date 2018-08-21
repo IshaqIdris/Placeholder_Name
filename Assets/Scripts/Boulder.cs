@@ -14,7 +14,7 @@ public class Boulder : MonoBehaviour {
     void Start()
     {
         timer = 0;
-        bullet = Resources.Load("Boulder2") as GameObject;
+        bullet = Resources.Load("Boulder3") as GameObject;
     }
 
     // Update is called once per frame
@@ -36,7 +36,7 @@ public class Boulder : MonoBehaviour {
         GameObject projectileForward = Instantiate(bullet) as GameObject;
         projectileForward.transform.position = transform.position + forward;
         Rigidbody rb = projectileForward.GetComponent<Rigidbody>();
-        projectileForward.transform.localScale += new Vector3(1F, 1F, 1F);
+        //projectileForward.transform.localScale += new Vector3(1F, 1F, 1F);
         rb.velocity = forward * shootSpeed;
 
         Destroy(projectileForward, 2);

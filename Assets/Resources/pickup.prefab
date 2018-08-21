@@ -9,47 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1826714770377724}
+  m_RootGameObject: {fileID: 1328220266601830}
   m_IsPrefabAsset: 1
---- !u!1 &1826714770377724
+--- !u!1 &1328220266601830
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4278944566765026}
-  - component: {fileID: 33691307168426430}
-  - component: {fileID: 23209813562527096}
-  - component: {fileID: 135328924507874264}
-  - component: {fileID: 54804573679298078}
-  - component: {fileID: 114534829599719806}
+  - component: {fileID: 4844607650215424}
+  - component: {fileID: 33100365146669460}
+  - component: {fileID: 23915040677782644}
+  - component: {fileID: 64045379474463678}
   m_Layer: 0
-  m_Name: boulder2
-  m_TagString: boulder
+  m_Name: pickup
+  m_TagString: collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4278944566765026
+--- !u!4 &4844607650215424
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1826714770377724}
+  m_GameObject: {fileID: 1328220266601830}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: -22.749268, y: -15.130975, z: -71.81273}
+  m_LocalScale: {x: 0.8569966, y: 0.8569966, z: 0.8569966}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23209813562527096
+--- !u!23 &23915040677782644
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1826714770377724}
+  m_GameObject: {fileID: 1328220266601830}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,7 +57,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: a68784b6251ae4b958838f1647d5df1d, type: 2}
+  - {fileID: 2100000, guid: 5cc0626967d264ad2be09c24fffb4684, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,48 +77,24 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33691307168426430
+--- !u!33 &33100365146669460
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1826714770377724}
-  m_Mesh: {fileID: 4300000, guid: 988aa5e03bc1f4aa99e3a3b82fd1d993, type: 3}
---- !u!54 &54804573679298078
-Rigidbody:
+  m_GameObject: {fileID: 1328220266601830}
+  m_Mesh: {fileID: 4300000, guid: 17889aaf964a142b1b63c8a45a58d672, type: 3}
+--- !u!64 &64045379474463678
+MeshCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1826714770377724}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &114534829599719806
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1826714770377724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3dca24773bfb4f8289c1928397aab31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!135 &135328924507874264
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1826714770377724}
+  m_GameObject: {fileID: 1328220266601830}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 17889aaf964a142b1b63c8a45a58d672, type: 3}

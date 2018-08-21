@@ -14,6 +14,7 @@ public class GroundMovementController : MonoBehaviour
     public float jumpHeight;
     public float fallSpeed;
     public GameObject particles;
+    public GameObject respawnPoint;
 
     CharacterController mover;
 
@@ -22,6 +23,7 @@ public class GroundMovementController : MonoBehaviour
     float turnSpeed;
     float timer;
     float jumpCounter;
+    float speedBoost;
 
     Vector2 input;
     Vector3 camF;
@@ -40,6 +42,7 @@ public class GroundMovementController : MonoBehaviour
 
     void Start()
     {
+        speedBoost = 0;
         mover = GetComponent<CharacterController>();
         timer = 0;
         jumpCounter = 0;
@@ -59,12 +62,13 @@ public class GroundMovementController : MonoBehaviour
         DoGravity();
         DoJump();
 
+        CheckSpeed();
+
+
         if (Input.GetButtonUp("Jump"))
         {
             jumpDown = false;
         }
-
-        print(velocity.magnitude);
         if (velocity.magnitude > 7)
         {
             particles.SetActive(true);
@@ -73,10 +77,19 @@ public class GroundMovementController : MonoBehaviour
         {
             particles.SetActive(false);
         }
-
         mover.Move(velocity * Time.deltaTime);
 
 
+    }
+
+    void CheckSpeed(){
+        if(speed>10){
+            speedBoost += Time.deltaTime;
+            if(speedBoost > 2){
+                speed = 10;
+                speedBoost = 0;
+            }
+        }
     }
 
     private void DoMove()
@@ -102,9 +115,7 @@ public class GroundMovementController : MonoBehaviour
     private void CalculateCamera()
     {
         camF = cam.forward;
-
         camR = cam.right;
-
         camF.y = 0;
         camR.y = 0;
         camF = camF.normalized;
@@ -132,11 +143,12 @@ public class GroundMovementController : MonoBehaviour
         {
             print("JUMPPAD");
             velocity.y -= gravity * Time.deltaTime;
-            velocity.y = Mathf.Clamp(velocity.y, -30, 30);
+            velocity.y = Mathf.Clamp(velocity.y, -20, 20);
         }
         else if (jumpPadType == "medium"){
+            //print("MEDIUM");
             velocity.y -= gravity * Time.deltaTime;
-            velocity.y = Mathf.Clamp(velocity.y, -35, 35);
+            velocity.y = Mathf.Clamp(velocity.y, -30, 30);
         }
         else if (jumpPadType =="high")
         {
@@ -189,12 +201,12 @@ public class GroundMovementController : MonoBehaviour
         }
         else if (jumpPad && jumpPadType == "low" )
         {
-            velocity.y = 20;
+            velocity.y = 30;
             jumpPadDown = true;
             jumpPad = false;
         }else if (jumpPad && jumpPadType == "medium")
         {
-            velocity.y = 25;
+            velocity.y = 40;
             jumpPadDown = true;
             jumpPad = false;
         }else if (jumpPad && jumpPadType == "high")
@@ -205,22 +217,18 @@ public class GroundMovementController : MonoBehaviour
         }
         else if ((mover.velocity.y < 0 && !jumpPad && jumpPadDown && jumpPadType == "low"))
         {
-            print("JUMPPAD DOWN");
             velocity.y = -10;
         }
         else if ((mover.velocity.y < 0 && !jumpPad && jumpPadDown && jumpPadType == "high"))
         {
-            print("JUMPPAD DOWN");
             velocity.y = -50;
         }
         else if ((mover.velocity.y < 0 && !jumpPad && jumpPadDown && jumpPadType == "medium"))
         {
-            print("JUMPPAD DOWN");
             velocity.y = -30;
         }
         else if (mover.velocity.y < 0 )
         {
-            print("JUMPPAD UP");
             velocity.y = fallSpeed;
         }
     }
@@ -231,18 +239,22 @@ public class GroundMovementController : MonoBehaviour
         //Collision with Moving Pad
         if (collision.gameObject.CompareTag("pad"))
         {
-            print("On Rock");
             transform.parent = collision.transform;
         }
         else
         {
-            print("DEPARENTED");
             transform.parent = null;
         }
 
         if (collision.gameObject.CompareTag("collectable"))
         {
             collision.gameObject.SetActive(false);
+            if (speed < 19)
+            {
+                speed += 6;
+            }
+
+
         }
 
     }
@@ -261,6 +273,12 @@ public class GroundMovementController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("COLLIDED");
+        if (collision.gameObject.CompareTag("boulder"))
+        {
+            mover.GetComponentInChildren<Animation>().setDead(true);
+            mover.transform.position = respawnPoint.transform.position;
+            print(respawnPoint.transform.position.ToString());
+            print("COLLIDED");
+        }
     }
 }

@@ -10,12 +10,17 @@ public class Animation : MonoBehaviour {
 	float inputV;
 	bool jump;
     bool isDead;
+    float downTime;
+
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform respawnPoint;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator>();
 		jump =false;
         isDead = false;
+        downTime = 0;
 	}
 	
 	// Update is called once per frame
@@ -32,10 +37,22 @@ public class Animation : MonoBehaviour {
 			jump = false;
 		}
 
-        if(isDead){
+        //if(downTime >1){
+        //    isDead = false;
+        //    downTime = 0;
+        //}
+
+        if(isDead ){
+            //print("DEAD");
             animator.SetBool("isDead", isDead);
+            downTime += Time.deltaTime;
+            if(downTime > 1){
+                isDead = false;
+                downTime = 0;
+            }
+
         }else{
-            animator.SetBool("isDead", false);
+            animator.SetBool("isDead", isDead);
         }
 
 		animator.SetBool("jump", jump);
