@@ -78,8 +78,6 @@ public class GroundMovementController : MonoBehaviour
             particles.SetActive(false);
         }
         mover.Move(velocity * Time.deltaTime);
-
-
     }
 
     void CheckSpeed(){
@@ -195,9 +193,10 @@ public class GroundMovementController : MonoBehaviour
             {
                 velocity.y = jumpHeight;
                 jumpCounter += 1;
-            }else if (!grounded){
-                velocity.y = fallSpeed;
             }
+            //}else if (!grounded){
+            //    velocity.y = jumpHeight;
+            //}
         }
         else if (jumpPad && jumpPadType == "low" )
         {
