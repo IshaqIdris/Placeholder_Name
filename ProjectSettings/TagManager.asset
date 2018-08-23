@@ -9,6 +9,7 @@ TagManager:
   - pad
   - collectable
   - boulder
+  - collectable2
   layers:
   - Default
   - TransparentFX

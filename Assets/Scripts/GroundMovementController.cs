@@ -83,7 +83,7 @@ public class GroundMovementController : MonoBehaviour
     void CheckSpeed(){
         if(speed>10){
             speedBoost += Time.deltaTime;
-            if(speedBoost > 2){
+            if(speedBoost > 1){
                 speed = 10;
                 speedBoost = 0;
             }
@@ -216,7 +216,7 @@ public class GroundMovementController : MonoBehaviour
         }
         else if ((mover.velocity.y < 0 && !jumpPad && jumpPadDown && jumpPadType == "low"))
         {
-            velocity.y = -10;
+            velocity.y = -20;
         }
         else if ((mover.velocity.y < 0 && !jumpPad && jumpPadDown && jumpPadType == "high"))
         {
@@ -252,10 +252,12 @@ public class GroundMovementController : MonoBehaviour
             {
                 speed += 6;
             }
-
-
         }
 
+        if (collision.gameObject.CompareTag("collectable2"))
+        {
+            collision.gameObject.SetActive(false);
+        }
     }
 
     public void SetJumPad(bool jumpPadBool, String type)
