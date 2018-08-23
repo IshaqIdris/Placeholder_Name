@@ -19,7 +19,7 @@ public class Cam : MonoBehaviour {
 	void LateUpdate () {
 		heading += Input.GetAxis("Mouse X")*Time.deltaTime*1040;
 		tilt += Input.GetAxis("Mouse Y")*Time.deltaTime*540;
-		tilt = Mathf.Clamp(tilt, -80, 80);
+		tilt = Mathf.Clamp(tilt, -80, 80);//Stop from going upside down
 		transform.rotation = Quaternion.Euler(tilt, heading, 0);
 
 		transform.position = player.position - transform.forward * camDist + Vector3.up * playerHeight;

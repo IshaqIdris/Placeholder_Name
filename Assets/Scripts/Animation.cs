@@ -31,33 +31,29 @@ public class Animation : MonoBehaviour {
 		animator.SetFloat("inputH", inputH);
 		animator.SetFloat("inputV", inputV);
 
+        //Jump animation
 		if(Input.GetButton("Jump")){
 			jump = true;
 		}else{
 			jump = false;
 		}
 
-        //if(downTime >1){
-        //    isDead = false;
-        //    downTime = 0;
-        //}
-
+      
+        //Play death animation 
         if(isDead ){
-            //print("DEAD");
             animator.SetBool("isDead", isDead);
             downTime += Time.deltaTime;
             if(downTime > 1){
                 isDead = false;
                 downTime = 0;
             }
-
         }else{
             animator.SetBool("isDead", isDead);
         }
-
 		animator.SetBool("jump", jump);
 	}
 
+    //Set if player is dead
     public void setDead(bool dead){
         this.isDead = dead;
     }

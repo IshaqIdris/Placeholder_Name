@@ -16,6 +16,7 @@ public class GroundMovementController : MonoBehaviour
     public GameObject particles;
     public GameObject respawnPoint;
 
+    //Player character controller
     CharacterController mover;
 
     float speed = 10;
@@ -61,7 +62,6 @@ public class GroundMovementController : MonoBehaviour
         DoMove();
         DoGravity();
         DoJump();
-
         CheckSpeed();
 
 
@@ -69,6 +69,8 @@ public class GroundMovementController : MonoBehaviour
         {
             jumpDown = false;
         }
+
+        //player trail
         if (velocity.magnitude > 7)
         {
             particles.SetActive(true);
@@ -80,6 +82,7 @@ public class GroundMovementController : MonoBehaviour
         mover.Move(velocity * Time.deltaTime);
     }
 
+    //Limit speed boosts by collectables
     void CheckSpeed(){
         if(speed>10){
             speedBoost += Time.deltaTime;
@@ -90,6 +93,7 @@ public class GroundMovementController : MonoBehaviour
         }
     }
 
+    //excecute player movements
     private void DoMove()
     {
         intent = camF * input.y + camR * input.x;
@@ -120,12 +124,14 @@ public class GroundMovementController : MonoBehaviour
         camR = camR.normalized;
     }
 
+    //get inputs from controller
     private void DoInput()
     {
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1);
     }
 
+    //Calculate gravity to be applied to the player
     private void DoGravity()
     {
         if (grounded)
@@ -137,14 +143,14 @@ public class GroundMovementController : MonoBehaviour
             velocity.y -= gravity * Time.deltaTime;
             velocity.y = Mathf.Clamp(velocity.y, -10, 10);
         }
+
+        //Gravity affected by what jumpad interacted with
         else if (jumpPadType == "low")
         {
-            print("JUMPPAD");
             velocity.y -= gravity * Time.deltaTime;
             velocity.y = Mathf.Clamp(velocity.y, -20, 20);
         }
         else if (jumpPadType == "medium"){
-            //print("MEDIUM");
             velocity.y -= gravity * Time.deltaTime;
             velocity.y = Mathf.Clamp(velocity.y, -30, 30);
         }
@@ -153,12 +159,12 @@ public class GroundMovementController : MonoBehaviour
             velocity.y -= gravity * Time.deltaTime;
             velocity.y = Mathf.Clamp(velocity.y, -60, 60);
         }else{
-            print("JUMPPAD");
             velocity.y -= gravity * Time.deltaTime;
             velocity.y = Mathf.Clamp(velocity.y, -30, 30);
         }
     }
 
+    //Detect if player grounded
     private void CalculateGround()
     {
         RaycastHit hit;
@@ -173,6 +179,7 @@ public class GroundMovementController : MonoBehaviour
         }
     }
 
+    //Perform jumping mechanic
     private void DoJump()
     {
         if (Input.GetButtonDown("Jump"))
@@ -194,10 +201,9 @@ public class GroundMovementController : MonoBehaviour
                 velocity.y = jumpHeight;
                 jumpCounter += 1;
             }
-            //}else if (!grounded){
-            //    velocity.y = jumpHeight;
-            //}
         }
+
+        //Different jump velocity speeds with jumpad interaction
         else if (jumpPad && jumpPadType == "low" )
         {
             velocity.y = 50;
@@ -214,6 +220,8 @@ public class GroundMovementController : MonoBehaviour
             jumpPadDown = true;
             jumpPad = false;
         }
+
+        //Different velocity fall down speeds based on jumpad interaction
         else if ((mover.velocity.y < 0 && !jumpPad && jumpPadDown && jumpPadType == "low"))
         {
             velocity.y = -20;
@@ -232,6 +240,7 @@ public class GroundMovementController : MonoBehaviour
         }
     }
 
+
     void OnControllerColliderHit(ControllerColliderHit collision)
     {
 
@@ -245,6 +254,7 @@ public class GroundMovementController : MonoBehaviour
             transform.parent = null;
         }
 
+        //Collision with collectable with speed boost
         if (collision.gameObject.CompareTag("collectable"))
         {
             collision.gameObject.SetActive(false);
@@ -254,24 +264,27 @@ public class GroundMovementController : MonoBehaviour
             }
         }
 
+        //collision with non speed boost collectable
         if (collision.gameObject.CompareTag("collectable2"))
         {
             collision.gameObject.SetActive(false);
         }
     }
 
+    //If player has interacted with jumpad
     public void SetJumPad(bool jumpPadBool, String type)
     {
-        print("GOT HERE");
         jumpPad = jumpPadBool;
         jumpPadType = type;
     }
 
+    //Return character controller
     public CharacterController GetMover()
     {
         return mover;
     }
 
+    //Player collision with boulder
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("boulder"))
@@ -279,7 +292,6 @@ public class GroundMovementController : MonoBehaviour
             mover.GetComponentInChildren<Animation>().setDead(true);
             mover.transform.position = respawnPoint.transform.position;
             print(respawnPoint.transform.position.ToString());
-            print("COLLIDED");
         }
     }
 }

@@ -6,10 +6,9 @@ public class EnemyBoulder: MonoBehaviour
     // Use this for initialization
     private void O(Collider other)
     {
-        print("BOULDER Hit");
         if (other.gameObject.CompareTag("Player"))
         {
-            print("BOULDER");
+            //Set player to dead
             GetComponent<Animation>().setDead(true);
         }
     }

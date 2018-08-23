@@ -30,7 +30,7 @@ public class Boulder : MonoBehaviour {
         }
     }
 
-    //Instaniates Bullet and shoots in the forward direction
+    //Instaniates Bullet and shoots in the forward direction and destroys itself after a set time
     private void shoot(Vector3 forward)
     {
         GameObject projectileForward = Instantiate(bullet) as GameObject;
