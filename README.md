@@ -4,6 +4,8 @@
 
 **Pair:** Mohamed Ishaq Idris, Brock Trewavas
 
+**Youtube link to game overview video:** https://www.youtube.com/watch?v=diZ41a9k7Pw&feature=youtu.be
+
 Placeholder Name is a 3D platformer game with a large focus on jumping and incoporating the two playing styles "exploration" and "speedrunner". As the game slogan above says we attempted to follow a somple narrative with a larger focus on the mechanics of the game.
 
 ## Level Structure/ Game Loop
@@ -33,8 +35,8 @@ The level design takes influence from a canyon aesthtic with rock themed walls a
 
 ## External Assests/Libraries used 
 
-[Unity Chan (Character)](https://assetstore.unity.com/packages/3d/characters/unity-chan-model-18705)
-[Cinemachine (Used for producing cinematics in presentation)](https://assetstore.unity.com/packages/essentials/cinemachine-79898)
+- [Unity Chan (Character)](https://assetstore.unity.com/packages/3d/characters/unity-chan-model-18705)
+- [Cinemachine (Used for producing cinematics in presentation)](https://assetstore.unity.com/packages/essentials/cinemachine-79898)
 
 
 
