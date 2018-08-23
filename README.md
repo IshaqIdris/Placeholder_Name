@@ -1,3 +1,5 @@
+![placeholder name](Screen Shot 2018-08-23 at 12.45.28 PM.png)
+
 # Placeholder Name
 
 **"Trying to get to something, to get to somewhere, to get to someone"**
