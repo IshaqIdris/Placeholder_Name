@@ -1,4 +1,4 @@
-![placeholder name](Screen Shot 2018-08-23 at 12.45.28 PM.png)
+![placeholder name](https://github.com/IshaqIdris/Placeholder_Name/blob/master/Screen%20Shot%202018-08-23%20at%2012.45.28%20PM.png?raw=true)
 
 # Placeholder Name
 
